@@ -16,6 +16,7 @@ public class RegistrationPageWithFaker {
     private RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private TestData testData = new TestData();
 
+    public String fname = testData.firstname;
     private SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -42,7 +43,7 @@ public class RegistrationPageWithFaker {
     }
 
     public RegistrationPageWithFaker setFirstName() {
-        firstNameInput.setValue(testData.firstname);
+        firstNameInput.setValue(fname);
         return this;
     }
 
@@ -118,12 +119,14 @@ public class RegistrationPageWithFaker {
     }
 
     public RegistrationPageWithFaker verifyTableValues(String key, String value) {
-        $(".table-responsive").$(byText(key)).sibling(0).shouldHave(text(value));
+        $(".table-responsive").$(byText(key)).
+                sibling(0).shouldHave(text(value));
+
+
         return this;
     }
 
     public RegistrationPageWithFaker RegistrationResultsModal() {
-        System.out.println("kuku");
         registrationResultsModal.verifyModalAppears();
         return this;
     }
