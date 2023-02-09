@@ -1,10 +1,9 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPageWithFaker;
 
 public class RegistrationTestWithFaker extends TestBase{
-
+    private TestData testData = new TestData();
     @Test
     void registrationTestSuccessful() {
 
@@ -23,10 +22,10 @@ public class RegistrationTestWithFaker extends TestBase{
                 .setCity("Delhi")
                 .clickSubmitButton();
         // проверка
-        registrationPage.RegistrationResultsModal();
-        registrationPage
-                .verifyTableValues("Student Name", "Alexandra" + " " + "Saveleva")
-                .verifyTableValues("Student Email", "alex@gmail.com")
+        registrationPagewithfaker.RegistrationResultsModal();
+        registrationPagewithfaker
+                .verifyTableValues("Student Name", testData.firstname + " " + testData.lastname)
+                .verifyTableValues("Student Email", testData.email)
                 .verifyTableValues("Gender", "Female")
                 .verifyTableValues("Mobile", "1234567890")
                 .verifyTableValues("Date of Birth", "05 March,2009")

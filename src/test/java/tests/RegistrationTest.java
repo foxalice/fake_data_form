@@ -17,7 +17,7 @@ public class RegistrationTest extends TestBase{
                 .setUserBirth("5", "March", "2009")
                 .setSubjects("Economics")
                 .setHobbies("Sports")
-                .setImage("1.png")
+                .setImage("img/1.png")
                 .setCurrentAddressInput("Some address 1")
                 .setState("NCR")
                 .setCity("Delhi")
@@ -33,7 +33,7 @@ public class RegistrationTest extends TestBase{
                 .verifyTableValues("Address", "Some address 1")
                 .verifyTableValues("Subjects", "Economics")
                 .verifyTableValues("Hobbies", "Sports")
-                .verifyTableValues("Picture", "1.png")
+                .verifyTableValues("Picture", "img/1.png")
                 .verifyTableValues("State and City", "Delhi");
 
     }

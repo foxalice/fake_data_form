@@ -123,6 +123,7 @@ public class RegistrationPageWithFaker {
     }
 
     public RegistrationPageWithFaker RegistrationResultsModal() {
+        System.out.println("kuku");
         registrationResultsModal.verifyModalAppears();
         return this;
     }
