@@ -16,7 +16,6 @@ public class RegistrationPageWithFaker {
     private RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private TestData testData = new TestData();
 
-    public String fname = testData.firstname;
     private SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
@@ -42,73 +41,73 @@ public class RegistrationPageWithFaker {
         return this;
     }
 
-    public RegistrationPageWithFaker setFirstName() {
-        firstNameInput.setValue(fname);
+    public RegistrationPageWithFaker setFirstName(String value) {
+        firstNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageWithFaker setLastName() {
-        lastNameInput.setValue(testData.lastname);
+    public RegistrationPageWithFaker setLastName(String value) {
+        lastNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageWithFaker setEmail() {
-        emailInput.setValue(testData.email);
+    public RegistrationPageWithFaker setEmail(String value) {
+        emailInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageWithFaker setGender() {
-        genderSection.$(byText(testData.gender)).click();
+    public RegistrationPageWithFaker setGender(String value) {
+        genderSection.$(byText(value)).click();
         return this;
     }
 
-    public RegistrationPageWithFaker setPhone() {
-        phoneInput.setValue(testData.phone);
+    public RegistrationPageWithFaker setPhone(String value) {
+        phoneInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageWithFaker setCurrentAddressInput() {
-        currentAddressInput.setValue(testData.adress);
+    public RegistrationPageWithFaker setCurrentAddressInput(String value) {
+        currentAddressInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageWithFaker setUserBirth() {
+    public RegistrationPageWithFaker setUserBirth(String day,String month,String year) {
         calendarSection.click();
-        new CalendarComponent().setBirth(testData.birthDay, testData.birthMonth, testData.birthYear);
+        new CalendarComponent().setBirth(day, month, year);
         return this;
     }
 
-    public RegistrationPageWithFaker setSubjects() {
-        for (String subject : testData.subjects) {
+    public RegistrationPageWithFaker setSubjects(String [] value) {
+        for (String subject : value) {
             subjectsContainerInput.setValue(subject);
             subjectsContainerAutoCompleteList.$(byText(subject)).click();
         }
         return this;
     }
 
-    public RegistrationPageWithFaker setHobbies() {
-        for (String hobby : testData.hobbies) {
+    public RegistrationPageWithFaker setHobbies(String [] value) {
+        for (String hobby : value) {
             hobbiesSection.$(byText(hobby)).click();
         }
         return this;
     }
 
-    public RegistrationPageWithFaker setImage() {
-        imageUpdateField.uploadFile(new File("src/test/resources/img/" + testData.img));
+    public RegistrationPageWithFaker setImage(String fileName) {
+        imageUpdateField.uploadFile(new File("src/test/resources/img/" + fileName));
         return this;
     }
 
-    public RegistrationPageWithFaker setState() {
+    public RegistrationPageWithFaker setState(String value) {
         stateField.click();
-        $(byText(testData.state)).click();
+        $(byText(value)).click();
         return this;
     }
 
-    public RegistrationPageWithFaker setCity() {
+    public RegistrationPageWithFaker setCity(String value) {
         //не помещается в экран форма - прокрутить до поля stateCity-wrapper
         $("#stateCity-wrapper").scrollIntoView(true);
         cityField.click();
-        $(byText(testData.city)).click();
+        $(byText(value)).click();
         return this;
     }
 
@@ -118,38 +117,10 @@ public class RegistrationPageWithFaker {
         return this;
     }
 
-    public RegistrationPageWithFaker verifyTableValues() {
+    public RegistrationPageWithFaker verifyTableValues(String key, String value) {
+        $(".table-responsive").$(byText(key)).
+                sibling(0).shouldHave(text(value));
 
-        $(".table-responsive").$(byText("Student Name")).
-        sibling(0).shouldHave(text(testData.firstname + " " + testData.lastname));
-
-        $(".table-responsive").$(byText("Student Email")).
-                sibling(0).shouldHave(text(testData.email));
-
-        $(".table-responsive").$(byText("Gender")).
-                sibling(0).shouldHave(text(testData.gender));
-
-        $(".table-responsive").$(byText("Mobile")).
-                sibling(0).shouldHave(text(testData.phone));
-
-        $(".table-responsive").$(byText("Date of Birth")).
-                sibling(0).shouldHave
-                        (text(testData.birthDay+" "+testData.birthMonth+","+testData.birthYear));
-
-        $(".table-responsive").$(byText("Address")).
-                sibling(0).shouldHave(text(testData.adress));
-
-        $(".table-responsive").$(byText("Subjects")).
-                sibling(0).shouldHave(text(testData.subjects[0]));
-
-        $(".table-responsive").$(byText("Hobbies")).
-                sibling(0).shouldHave(text(testData.hobbies[0]));
-
-        $(".table-responsive").$(byText("Picture")).
-                sibling(0).shouldHave(text(testData.img));
-
-        $(".table-responsive").$(byText("State and City")).
-                sibling(0).shouldHave(text(testData.state));
 
         return this;
     }
