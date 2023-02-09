@@ -57,58 +57,58 @@ public class RegistrationPageWithFaker {
         return this;
     }
 
-    public RegistrationPageWithFaker setGender(String values) {
-        genderSection.$(byText(values)).click();
+    public RegistrationPageWithFaker setGender() {
+        genderSection.$(byText(testData.gender)).click();
         return this;
     }
 
-    public RegistrationPageWithFaker setPhone(String values) {
-        phoneInput.setValue(values);
+    public RegistrationPageWithFaker setPhone() {
+        phoneInput.setValue(testData.phone);
         return this;
     }
 
-    public RegistrationPageWithFaker setCurrentAddressInput(String value) {
-        currentAddressInput.setValue(value);
+    public RegistrationPageWithFaker setCurrentAddressInput() {
+        currentAddressInput.setValue(testData.adress);
         return this;
     }
 
-    public RegistrationPageWithFaker setUserBirth(String day, String month, String year) {
+    public RegistrationPageWithFaker setUserBirth() {
         calendarSection.click();
-        new CalendarComponent().setBirth(day, month, year);
+        new CalendarComponent().setBirth(testData.birthDay, testData.birthMonth, testData.birthYear);
         return this;
     }
 
-    public RegistrationPageWithFaker setSubjects(String... value) {
-        for (String subject : value) {
+    public RegistrationPageWithFaker setSubjects() {
+        for (String subject : testData.subjects) {
             subjectsContainerInput.setValue(subject);
             subjectsContainerAutoCompleteList.$(byText(subject)).click();
         }
         return this;
     }
 
-    public RegistrationPageWithFaker setHobbies(@org.jetbrains.annotations.NotNull String... value) {
-        for (String hobby : value) {
+    public RegistrationPageWithFaker setHobbies() {
+        for (String hobby : testData.hobbies) {
             hobbiesSection.$(byText(hobby)).click();
         }
         return this;
     }
 
-    public RegistrationPageWithFaker setImage(String fileName) {
-        imageUpdateField.uploadFile(new File("src/test/resources/img/" + fileName));
+    public RegistrationPageWithFaker setImage() {
+        imageUpdateField.uploadFile(new File("src/test/resources/img/" + testData.img));
         return this;
     }
 
-    public RegistrationPageWithFaker setState(String state) {
+    public RegistrationPageWithFaker setState() {
         stateField.click();
-        $(byText(state)).click();
+        $(byText(testData.state)).click();
         return this;
     }
 
-    public RegistrationPageWithFaker setCity(String city) {
+    public RegistrationPageWithFaker setCity() {
         //не помещается в экран форма - прокрутить до поля stateCity-wrapper
         $("#stateCity-wrapper").scrollIntoView(true);
         cityField.click();
-        $(byText(city)).click();
+        $(byText(testData.city)).click();
         return this;
     }
 
@@ -118,10 +118,38 @@ public class RegistrationPageWithFaker {
         return this;
     }
 
-    public RegistrationPageWithFaker verifyTableValues(String key, String value) {
-        $(".table-responsive").$(byText(key)).
-                sibling(0).shouldHave(text(value));
+    public RegistrationPageWithFaker verifyTableValues() {
 
+        $(".table-responsive").$(byText("Student Name")).
+        sibling(0).shouldHave(text(testData.firstname + " " + testData.lastname));
+
+        $(".table-responsive").$(byText("Student Email")).
+                sibling(0).shouldHave(text(testData.email));
+
+        $(".table-responsive").$(byText("Gender")).
+                sibling(0).shouldHave(text(testData.gender));
+
+        $(".table-responsive").$(byText("Mobile")).
+                sibling(0).shouldHave(text(testData.phone));
+
+        $(".table-responsive").$(byText("Date of Birth")).
+                sibling(0).shouldHave
+                        (text(testData.birthDay+" "+testData.birthMonth+","+testData.birthYear));
+
+        $(".table-responsive").$(byText("Address")).
+                sibling(0).shouldHave(text(testData.adress));
+
+        $(".table-responsive").$(byText("Subjects")).
+                sibling(0).shouldHave(text(testData.subjects[0]));
+
+        $(".table-responsive").$(byText("Hobbies")).
+                sibling(0).shouldHave(text(testData.hobbies[0]));
+
+        $(".table-responsive").$(byText("Picture")).
+                sibling(0).shouldHave(text(testData.img));
+
+        $(".table-responsive").$(byText("State and City")).
+                sibling(0).shouldHave(text(testData.state));
 
         return this;
     }
