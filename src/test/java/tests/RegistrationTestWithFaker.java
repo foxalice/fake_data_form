@@ -3,7 +3,6 @@ package tests;
 import org.junit.jupiter.api.Test;
 
 public class RegistrationTestWithFaker extends TestBase{
-    private TestData testData = new TestData();
 
     @Test
     void registrationTestSuccessful() {
